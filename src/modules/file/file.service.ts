@@ -72,6 +72,7 @@ export class FileService {
   }
 
   async deleteFile(key: string) {
+    console.log('keykey', key);
     if (!key?.trim()) {
       throw new BadRequestException('key обязателен');
     }

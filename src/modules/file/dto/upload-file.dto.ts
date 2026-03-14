@@ -6,7 +6,7 @@ export class UploadFileDto {
   @ApiProperty({
     description: 'Название проекта',
     enum: FILE_PROJECTS,
-    example: 'suppliers',
+    example: 'marketline',
   })
   @IsString()
   @IsIn(FILE_PROJECTS)

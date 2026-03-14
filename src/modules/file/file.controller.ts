@@ -2,13 +2,13 @@ import {
   Body,
   Controller,
   Delete,
-  Post,
+  Post, Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
-import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { FileService } from './file.service';
 import { UploadFileDto } from './dto/upload-file.dto';
@@ -41,7 +41,7 @@ export class FileController {
         },
         project: {
           type: 'string',
-          example: 'suppliers',
+          example: 'marketline',
           description: 'Название проекта',
         },
         folder: {
@@ -112,7 +112,8 @@ export class FileController {
 
   @Delete('delete')
   @ApiOperation({ summary: 'Удаление файла' })
-  deleteFile(@Body('key') key: string) {
+  @ApiQuery({ name: 'key', required: true, type: String })
+  deleteFile(@Query('key') key: string) {
     return this.filesService.deleteFile(key);
   }
 }
